@@ -2,6 +2,8 @@
 import React from 'react';
 import { css, jsx, Global } from '@emotion/core';
 
+import { useRouter } from 'next/router';
+
 function Home() {
   const styles = css`
     margin: 0px;
@@ -24,11 +26,13 @@ function Home() {
     }
   `;
 
+  const router = useRouter();
+
   return (
     <div css={styles}>
       <img src="https://images.wallpapersden.com/image/download/camille-league-of-legends_68170_1920x1133.jpg"/>
       <input type="text"></input>
-      <button>Search</button>
+      <button onClick={() => router.push('/summoner')}>Search</button>
     </div>
   );
 }
