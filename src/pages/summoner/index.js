@@ -1,16 +1,28 @@
 /** @jsx jsx */
-import React from 'react';
-import { css, jsx, Global } from '@emotion/core';
+import React, { useState } from "react";
+import { css, jsx, Global } from "@emotion/core";
 
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 function Summoner() {
   const router = useRouter();
+  const [summonerName, setSummonerName] = useState("");
 
   return (
     <div>
-        <h1>Summoner</h1>
-        <button onClick={() => router.push('/summoner/12837912873')}>Go to Summoner 12837912873</button>
+      <h1>Summoner</h1>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          router.push(`/summoner/${summonerName}`);
+        }}
+      >
+        <input
+          value={summonerName}
+          onChange={e => setSummonerName(e.target.value)}
+        />
+        <button type="submit">Go To Summoner</button>
+      </form>
     </div>
   );
 }
