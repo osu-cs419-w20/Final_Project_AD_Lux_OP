@@ -2,7 +2,7 @@
 import React from 'react';
 import { css, jsx, Global } from '@emotion/core';
 
-function FreeToPlayChampions() {
+
 
   class FreeChamps extends React.Component {
     constructor(props) {
@@ -60,6 +60,7 @@ function FreeToPlayChampions() {
   //       <h1>FreeToPlayChampions</h1>
   //   </div>
   // );
-}
+  }
 
-export default FreeToPlayChampions;
+
+export FreeChamps;
