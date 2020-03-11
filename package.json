@@ -7,15 +7,22 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "graceful-fs": "^4.2.3",
+    "http-proxy-middleware": "^1.0.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "leaguejs": "^2.1.2",
+    "micro-cors": "^0.1.1",
     "next": "^9.2.2",
+    "path-browserify": "^1.0.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },
+  "proxy": "https://na1.api.riotgames.com/lol",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 8080"
   },
   "eslintConfig": {
     "extends": "react-app"
