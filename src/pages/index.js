@@ -1,10 +1,12 @@
 /** @jsx jsx */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, jsx, Global } from '@emotion/core';
 
 import { useRouter } from 'next/router';
 
 import fetch from 'isomorphic-unfetch';
+
+import { getSummonerByName, getStatsBySummonerId, getMatchHistoryBySummonerId, getChampionMasterBySummonerId } from '../api/api';
 
 function Home ({ data }) {
   
@@ -30,11 +32,22 @@ function Home ({ data }) {
     }
   `;
 
-  async function handleClick() {
-    router.push('/summoner')
-  }
+  const [test, setTest] = useState({});
 
-  console.log(data);
+  useEffect(() => {
+    
+  });
+
+  async function handleClick() {
+    const id = await getSummonerByName('jmanosu');
+    console.log(id);
+    const stats = await getStatsBySummonerId(id);
+    console.log(stats);
+    const matchHistory = await getMatchHistoryBySummonerId(id);
+    console.log(matchHistory);
+    const mastery = await getChampionMasterBySummonerId(id);
+    console.log(mastery);
+  }
 
   return (
     <div css={styles}>
@@ -48,10 +61,8 @@ function Home ({ data }) {
 }
 
 Home.getInitialProps = async function (context) {
-  console.log(context);
   let responseBody = "";
-  console.log("quering for champions")
-  const url = 'https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-a3fce233-6c1f-4697-85c9-757a0cad7a7e';
+  const url = 'https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52';
   const apiToken = "RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52";
   const response = await fetch(url, {
     method: 'GET'
