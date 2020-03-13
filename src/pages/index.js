@@ -39,14 +39,6 @@ function Home ({ data }) {
   });
 
   async function handleClick() {
-    const id = await getSummonerByName('jmanosu');
-    console.log(id);
-    const stats = await getStatsBySummonerId(id);
-    console.log(stats);
-    const matchHistory = await getMatchHistoryBySummonerId(id);
-    console.log(matchHistory);
-    const mastery = await getChampionMasterBySummonerId(id);
-    console.log(mastery);
   }
 
   return (
@@ -58,17 +50,6 @@ function Home ({ data }) {
       </h1>
     </div>
   );
-}
-
-Home.getInitialProps = async function (context) {
-  let responseBody = "";
-  const url = 'https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52';
-  const apiToken = "RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52";
-  const response = await fetch(url, {
-    method: 'GET'
-  });
-  responseBody = await response.json();
-  return { data: responseBody };
 }
 
 export default Home;
