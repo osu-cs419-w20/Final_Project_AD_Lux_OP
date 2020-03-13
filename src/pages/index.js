@@ -1,10 +1,12 @@
 /** @jsx jsx */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, jsx, Global } from '@emotion/core';
 
 import { useRouter } from 'next/router';
 
 import fetch from 'isomorphic-unfetch';
+
+import { getSummonerByName, getStatsBySummonerId, getMatchHistoryBySummonerId, getChampionMasterBySummonerId } from '../api/api';
 
 function Home ({ data }) {
   
@@ -30,11 +32,14 @@ function Home ({ data }) {
     }
   `;
 
-  async function handleClick() {
-    router.push('/summoner')
-  }
+  const [test, setTest] = useState({});
 
-  console.log(data);
+  useEffect(() => {
+    
+  });
+
+  async function handleClick() {
+  }
 
   return (
     <div css={styles}>
@@ -45,18 +50,6 @@ function Home ({ data }) {
       </h1>
     </div>
   );
-}
-
-Home.getInitialProps = async function (context) {
-  let responseBody = "";
-  console.log("quering for champions")
-  const url = 'https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-a3fce233-6c1f-4697-85c9-757a0cad7a7e';
-  const apiToken = "RGAPI-a3fce233-6c1f-4697-85c9-757a0cad7a7e";
-  const response = await fetch(url, {
-    method: 'GET'
-  });
-  responseBody = await response.json();
-  return { data: responseBody };
 }
 
 export default Home;
