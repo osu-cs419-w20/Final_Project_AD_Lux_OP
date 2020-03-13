@@ -48,10 +48,11 @@ function Home ({ data }) {
 }
 
 Home.getInitialProps = async function (context) {
+  console.log(context);
   let responseBody = "";
   console.log("quering for champions")
   const url = 'https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-a3fce233-6c1f-4697-85c9-757a0cad7a7e';
-  const apiToken = "RGAPI-a3fce233-6c1f-4697-85c9-757a0cad7a7e";
+  const apiToken = "RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52";
   const response = await fetch(url, {
     method: 'GET'
   });
