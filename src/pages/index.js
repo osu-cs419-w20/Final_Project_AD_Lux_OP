@@ -45,6 +45,8 @@ export default function Home({ data }) {
     }
   }
 
+  console.log(data);
+
   return (
     <div css={styles}>
       <h1>AD LUX OP</h1>
