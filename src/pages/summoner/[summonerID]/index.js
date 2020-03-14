@@ -4,6 +4,7 @@ import { css, jsx, Global } from "@emotion/core";
 import { useRouter } from "next/router";
 import SummonerStats from "../../../components/SummonerStats";
 import Spinner from "../../../components/Spinner";
+import { getStatsBySummonerId } from "../../../api/api";
 
 function Summoner() {
   const router = useRouter();
@@ -15,12 +16,8 @@ function Summoner() {
   useEffect(() => {
     if (summonerID) {
       async function getSummonerStats() {
-        const url = `https://league-proxy.herokuapp.com/lol/league/v4/entries/by-summoner/${summonerID}?api_key=RGAPI-676a41fd-4840-4883-a548-72b432302ed9`;
-        const response = await fetch(url, {
-          method: "GET"
-        });
-        if (response) {
-          const responseBody = await response.json();
+        const responseBody = await getStatsBySummonerId(summonerID);
+        if (responseBody) {
           console.log("RESPONSE!");
           console.log(responseBody);
           if (responseBody[0]) {
