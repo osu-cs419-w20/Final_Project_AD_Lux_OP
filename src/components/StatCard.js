@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { keyframes, css, jsx } from "@emotion/core";
+import SeriesPromo from "./SeriesPromo";
 
 const wiggle = keyframes`
   from, to { transform: rotate(0); }
@@ -25,37 +26,71 @@ const Rank = styled.div`
 `;
 
 const card = css`
-  display: flex;
-  flex-direction: column;
+  align-self: center;
+  align-items: stretch;
+  flex: 1;
 `;
 
 const Name = styled.h1`
   align-self: center;
 `;
 
+const promoBox = css`
+  align-self: flex-end;
+`;
+
+const win = css`
+  color: green;
+`;
+
+const lose = css`
+  color: red;
+`;
+
 const StatContainer = styled.div`
-  border: 1px solid black;
-  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  border: 2px solid lightgrey;
+  border-radius: 25px;
+  padding: 40px;
+  margin: 10px;
+  width: 400px;
+  height: 600px;
+  text-align: center;
+
+  p {
+    font-size: 24;
+    font-weight: bold;
+  }
 `;
 
 export default function StatCard({ stats, name }) {
   const ratio = (stats.wins / stats.losses).toFixed(2);
+  console.log("SERIES", stats.miniSeries);
   return (
     <div css={card}>
-      <Name>{name} Stats</Name>
       <StatContainer>
-        {" "}
+        <Name>{name} Stats</Name>{" "}
         <Rank>
           <RankImage src={"/icons/Emblem_" + stats.tier + ".png"} />
           <p>
             {stats.tier} {stats.rank}
           </p>
+          <p>{stats.leaguePoints} Points</p>
+          {stats.hotStreak && <p css={onFire}>🔥 Hot Streak!</p>}
         </Rank>
-        {stats.hotStreak && <p css={onFire}>🔥 Hot Streak!</p>}
-        <p>Current Points: {stats.leaguePoints}</p>
-        <p>Wins: {stats.wins}</p>
-        <p>Losses: {stats.losses}</p>
-        <p>Win/Loss Ratio: {ratio}</p>
+        <p css={win}>Wins: {stats.wins}</p>
+        <p css={lose}>Losses: {stats.losses}</p>
+        <p>
+          Win/Loss Ratio: {ratio} {ratio > 0.5 ? "😊" : "😪"}
+        </p>
+        {stats.miniSeries && (
+          <>
+            <p>Promotion Series Status:</p>
+            <SeriesPromo css={promoBox} progress={stats.miniSeries.progress} />
+          </>
+        )}
       </StatContainer>
     </div>
   );

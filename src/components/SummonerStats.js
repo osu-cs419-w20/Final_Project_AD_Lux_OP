@@ -1,6 +1,18 @@
+/** @jsx jsx **/
 import React, { useState, useEffect } from "react";
 import FlexStats from "./StatCard";
 import StatCard from "./StatCard";
+import styled from "@emotion/styled";
+import { css, jsx } from "@emotion/core";
+
+const rankedContainer = css`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 1800px) {
+    flex-direction: column;
+  }
+`;
 
 export default function SummonerStats(props) {
   console.log("PROPS", props);
@@ -15,12 +27,14 @@ export default function SummonerStats(props) {
 
   return (
     <div>
-      {props.flexStats && (
-        <StatCard name="Ranked Flex" stats={props.flexStats} />
-      )}
-      {props.soloDuoStats && (
-        <StatCard name="Solo/Duo" stats={props.soloDuoStats} />
-      )}
+      <div css={rankedContainer}>
+        {props.flexStats.tier && (
+          <StatCard name="Ranked Flex" stats={props.flexStats} />
+        )}
+        {props.soloDuoStats.tier && (
+          <StatCard name="Solo/Duo" stats={props.soloDuoStats} />
+        )}
+      </div>
     </div>
   );
 }

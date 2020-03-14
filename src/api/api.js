@@ -20,6 +20,7 @@ export async function getStatsBySummonerId(id) {
 
 export async function getMatchHistoryBySummonerId(id) {
   const url = baseUrl + "/lol/match/v4/matchlists/by-account/" + id;
+  console.log("ID: ", id);
   const response = await fetch(url, {
     method: "GET"
   });
@@ -30,6 +31,15 @@ export async function getMatchHistoryBySummonerId(id) {
 export async function getChampionMasterBySummonerId(id) {
   const url =
     baseUrl + "/lol/champion-mastery/v4/champion-masteries/by-summoner/" + id;
+  const response = await fetch(url, {
+    method: "GET"
+  });
+  const responseBody = await response.json();
+  return responseBody;
+}
+
+export async function getSummonerbyId(id) {
+  const url = baseUrl + "/lol/summoner/v4/summoners/" + id;
   const response = await fetch(url, {
     method: "GET"
   });

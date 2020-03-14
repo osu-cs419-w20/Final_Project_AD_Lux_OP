@@ -8,11 +8,11 @@ import Spinner from "../../../components/Spinner";
 import { getStatsBySummonerId } from "../../../api/api";
 
 const container = css`
-  padding-right: 300px;
-  padding-left: 300px;
-  align-content: center;
+  padding-right: 440px;
+  padding-left: 440px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Name = styled.h1`
@@ -31,7 +31,6 @@ function Summoner() {
       async function getSummonerStats() {
         const responseBody = await getStatsBySummonerId(summonerID);
         if (responseBody) {
-          console.log("RESPONSE!");
           console.log(responseBody);
           if (responseBody[0]) {
             console.log("has flex stats");
@@ -56,7 +55,9 @@ function Summoner() {
         <Spinner />
       ) : (
         <>
-          <Name>{rankedFlexStats.summonerName}</Name>
+          <div>
+            <Name>{rankedFlexStats.summonerName}</Name>
+          </div>
 
           <SummonerStats
             flexStats={rankedFlexStats ? rankedFlexStats : null}
@@ -64,6 +65,13 @@ function Summoner() {
           />
         </>
       )}
+      <button
+        onClick={() => {
+          router.push(`/summoner/${summonerID}/match-history`);
+        }}
+      >
+        View Match History
+      </button>
     </div>
   );
 }

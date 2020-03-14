@@ -4,7 +4,7 @@ const app = express();
 const port = 8080;
 
 const baseUrl = "https://na1.api.riotgames.com";
-const apiKey = "RGAPI-60a348f6-14e7-49a5-90d3-58e8ad446e52";
+const apiKey = "RGAPI-6a16fd84-8670-4615-9cf0-dd93162df7ff";
 
 app.get("/api/*", (req, res) => {
   request(
