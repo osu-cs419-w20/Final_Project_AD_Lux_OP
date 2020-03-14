@@ -1,55 +1,66 @@
 /** @jsx jsx */
-import React, { useEffect, useState } from 'react';
-import { css, jsx, Global } from '@emotion/core';
+import React, { useState } from "react";
+import { css, jsx, Global } from "@emotion/core";
+import { useRouter, Router } from "next/router";
+import fetch from "isomorphic-unfetch";
+import {
+  getSummonerByName,
+  getStatsBySummonerId,
+  getMatchHistoryBySummonerId,
+  getChampionMasterBySummonerId
+} from "../api/api";
 
-import { useRouter } from 'next/router';
+const styles = css`
+  margin: 0px;
+  padding: 0px;
 
-import fetch from 'isomorphic-unfetch';
+  img {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
 
-import { getSummonerByName, getStatsBySummonerId, getMatchHistoryBySummonerId, getChampionMasterBySummonerId } from '../api/api';
-
-function Home ({ data }) {
-  
-  const router = useRouter();
-  const styles = css`
-    margin: 0px;
-    padding: 0px;
-
-    width: 100%;
+    /* Full height */
     height: 100%;
+    width: auto;
 
-    img {
-      z-index:-1;
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      display: block;
+    text-align: center;
+  }
+`;
 
-      /* Full height */
-      height: 100%;
-      width: auto;
+export default function Home({ data }) {
+  const router = useRouter();
+  const query = router.query.q;
+  const [summonerName, setSummonerName] = useState("");
 
-      text-align: center;
+  async function getSummonerID(summonerName) {
+    const responseBody = await getSummonerByName(summonerName);
+    if (responseBody) {
+      console.log("REEEEEEEEEEEEEEEEEEEEE");
+      console.log(("RECEIVED", responseBody.id));
+      router.push(`/summoner/${responseBody.id}`);
     }
-  `;
-
-  const [test, setTest] = useState({});
-
-  useEffect(() => {
-    
-  });
-
-  async function handleClick() {
   }
 
   return (
     <div css={styles}>
-      <input type="text"></input>
-      <button onClick={() => handleClick()}>Search</button>
-      <h1>
-        this is the data:
-      </h1>
+      <h1>AD LUX OP</h1>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          getSummonerID(summonerName);
+          // router.push(`/summoner/${summonerID}`);
+        }}
+      >
+        <input
+          value={summonerName}
+          onChange={e => setSummonerName(e.target.value)}
+        />
+        <button type="submit">Go!</button>
+      </form>
     </div>
   );
 }
-
-export default Home;
