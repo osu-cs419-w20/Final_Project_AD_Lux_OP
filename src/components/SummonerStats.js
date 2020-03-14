@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import FlexStats from "./FlexStats";
-import SoloDuoStats from "./SoloDuoStats";
+import FlexStats from "./StatCard";
+import StatCard from "./StatCard";
 
 export default function SummonerStats(props) {
   console.log("PROPS", props);
@@ -15,8 +15,12 @@ export default function SummonerStats(props) {
 
   return (
     <div>
-      {props.flexStats && <FlexStats stats={props.flexStats} />}
-      {props.soloDuoStats && <SoloDuoStats stats={props.soloDuoStats} />}
+      {props.flexStats && (
+        <StatCard name="Ranked Flex" stats={props.flexStats} />
+      )}
+      {props.soloDuoStats && (
+        <StatCard name="Solo/Duo" stats={props.soloDuoStats} />
+      )}
     </div>
   );
 }

@@ -39,8 +39,6 @@ export default function Home({ data }) {
   async function getSummonerID(summonerName) {
     const responseBody = await getSummonerByName(summonerName);
     if (responseBody) {
-      console.log("REEEEEEEEEEEEEEEEEEEEE");
-      console.log(("RECEIVED", responseBody.id));
       router.push(`/summoner/${responseBody.id}`);
     }
   }
