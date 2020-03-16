@@ -13,6 +13,19 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 10px;
+  }
 `;
 
 const Name = styled.h1`
@@ -47,7 +60,10 @@ function Summoner() {
             console.log(responseBody[1]);
             setRankedSoloDuoStats(responseBody[1]);
           }
-
+          else {
+            setRankedFlexStats("Unranked");
+            setRankedSoloDuoStats("Unranked");
+          }
           setIsLoading(false);
         }
       }
@@ -77,7 +93,7 @@ function Summoner() {
       ) : (
         <>
           <div>
-            <Name>{rankedFlexStats.summonerName}</Name>
+            <Name>{summonerInfo.name}</Name>
           </div>
           <img src={finalIconUrl} height="100" width="100"/>
           <div>
