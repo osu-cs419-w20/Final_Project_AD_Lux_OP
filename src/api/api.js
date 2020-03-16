@@ -46,7 +46,7 @@ export async function getSummonerbyId(id) {
 }
 
 export async function getMatchInfoByMatchId(id) {
-  const url = baseUrl + "/riot/lol/match/v4/matches/ " + id;
+  const url = baseUrl + "/riot/lol/match/v4/matches/" + id;
   const response = await fetch(url, {
     method: "GET"
   });
@@ -55,7 +55,7 @@ export async function getMatchInfoByMatchId(id) {
 }
 
 export async function getChampionInfoById(id) {
-  const url = baseUrl + "/assets/champion/id" + id + "/info";
+  const url = baseUrl + "/assets/champion/id/" + id + "/info";
   const response = await fetch(url, {
     method: "GET"
   });

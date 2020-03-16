@@ -54,13 +54,13 @@ export default function ItemBar({ stats }) {
 
   return (
     <ItemContainer>
-      {itemsArray.map(item => {
+      {itemsArray.map((item, i) => {
         return item !== "0" ? (
-          <ImageBox>
-            <Item src={item} />
+          <ImageBox key={i}>
+            <Item src={item}/>
           </ImageBox>
         ) : (
-          <EmptyImage />
+          <EmptyImage key={i}/>
         );
       })}
     </ItemContainer>
