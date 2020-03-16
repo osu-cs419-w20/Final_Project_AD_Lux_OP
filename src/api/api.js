@@ -47,6 +47,15 @@ export async function getSummonerbyId(id) {
   return responseBody;
 }
 
+export async function getMatchInfoByMatchId(id) {
+  const url = baseUrl + riotEndpoint + "/lol/match/v4/matches/ " + id;
+  const response = await fetch(url, {
+    method: "GET"
+  });
+  const responseBody = await response.json();
+  return responseBody;
+}
+
 export async function getChampionInfoById(id) {
   const url = baseUrl + "/ddragon/champion/id" + id + "/info";
   const response = await fetch(url, {
@@ -79,3 +88,4 @@ export function getChampionFullImageUrlById(id) {
   console.log(url);
   return url;
 }
+
