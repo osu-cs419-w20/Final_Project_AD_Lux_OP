@@ -25,25 +25,27 @@ const container = css`
 
 function MatchHistory() {
   const router = useRouter();
-  const [loading, setIsLoading] = useState(true);
-  const [accountId, setAccountID] = useState("");
-  const [summonerName, setSummonerName] = useState("");
-  const [matchHistory, setMatchHistory] = useState([]);
   const { summonerID } = router.query;
 
+  const [loading, setIsLoading] = useState(true);
+  const [summonerName, setSummonerName] = useState("");
+  const [matchHistory, setMatchHistory] = useState([]);
 
   useEffect(() => {
     async function getMatchHistory() {
+      if (!summonerID) {
+        return;
+      }
+
       const summonerInfo = await getSummonerbyId(summonerID);
-      setAccountID(summonerInfo.accountId);
       setSummonerName(summonerInfo.name);
       if (summonerInfo) {
-        const tempMatchHistory = (await getMatchHistoryBySummonerId(summonerInfo.accountId)).matches;
-        setMatchHistory(_.slice(tempMatchHistory, 0, 10));
-        setIsLoading(false);      
+        const matchHistory = (await getMatchHistoryBySummonerId(summonerInfo.accountId)).matches;
+        setMatchHistory(_.slice(matchHistory, 0, 10));
+        setIsLoading(false);
       }
     }
-    
+
     getMatchHistory();
   }, [summonerID]);
 
