@@ -26,6 +26,10 @@ function Summoner() {
   const [rankedSoloDuoStats, setRankedSoloDuoStats] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
+  var iconBaseUrl = "https://opgg-static.akamaized.net/images/profile_icons/profileIcon";
+  var iconID = "";
+  var iconFormat = ".jpg";
+
   useEffect(() => {
     if (summonerID) {
       async function getSummonerStats() {
@@ -52,6 +56,7 @@ function Summoner() {
           if (responseBody[0]) {
             console.log("getting profile icon");
             console.log(responseBody[0]);
+            iconID = 594;
           }
         }
       }
@@ -59,6 +64,8 @@ function Summoner() {
       getSummonerIcon();
     }
   }, [summonerID]);
+
+  var finalIconUrl = iconBaseUrl.concat(iconID).concat(iconFormat);
 
   return (
     <div css={container}>
@@ -69,7 +76,7 @@ function Summoner() {
           <div>
             <Name>{rankedFlexStats.summonerName}</Name>
           </div>
-          <img src="https://opgg-static.akamaized.net/images/profile_icons/profileIcon594.jpg"/>
+          <img src={finalIconUrl} height="100" width="100"/>
 
           <SummonerStats
             flexStats={rankedFlexStats ? rankedFlexStats : null}
