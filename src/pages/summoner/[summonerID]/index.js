@@ -15,7 +15,7 @@ const container = css`
   align-items: center;
 
   button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4caf50; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -26,6 +26,13 @@ const container = css`
     margin: auto;
     margin-top: 10px;
   }
+`;
+
+const ImgContainer = styled.div`
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
 `;
 
 const Name = styled.h1`
@@ -40,7 +47,8 @@ function Summoner() {
   const [summonerInfo, setSummonerInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  var iconBaseUrl = "http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/";
+  var iconBaseUrl =
+    "http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/";
   var iconID = "";
   var iconFormat = ".png";
 
@@ -59,8 +67,7 @@ function Summoner() {
             console.log("has soloduo stats");
             console.log(responseBody[1]);
             setRankedSoloDuoStats(responseBody[1]);
-          }
-          else {
+          } else {
             setRankedFlexStats("Unranked");
             setRankedSoloDuoStats("Unranked");
           }
@@ -70,9 +77,9 @@ function Summoner() {
       async function getSummonerInfo() {
         const responseBody = await getSummonerById(summonerID);
         if (responseBody) {
-            console.log("getting profile icon");
-            console.log(responseBody);
-            setSummonerInfo(responseBody);
+          console.log("getting profile icon");
+          console.log(responseBody);
+          setSummonerInfo(responseBody);
         }
       }
       getSummonerStats();
@@ -95,7 +102,9 @@ function Summoner() {
           <div>
             <Name>{summonerInfo.name}</Name>
           </div>
-          <img src={finalIconUrl} height="100" width="100"/>
+          <ImgContainer>
+            <img src={finalIconUrl} height="100" width="100" />
+          </ImgContainer>
           <div>
             <h2>Current Level: {summonerInfo.summonerLevel}</h2>
           </div>
