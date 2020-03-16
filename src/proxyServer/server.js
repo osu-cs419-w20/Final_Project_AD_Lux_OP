@@ -20,30 +20,25 @@ app.get("/riot/*", (req, res) => {
   );
 });
 
-app.get("/ddragon/champion/:id/info", (req, res) => {
+app.get("/ddragon/champion/id/:id/info", (req, res) => {
   res.send(ddragonHelper.getChampionInfoById(req.params.id));
 });
 
-app.get("/ddragon/champion/:id/image/full", (req, res) => {
+app.get("/ddragon/champion/id/:id/image/full", (req, res) => {
   res.sendFile(__dirname + ddragonHelper.getChampionFullImagePathById(req.params.id));
 });
 
-/*
-const ddragonBaseUrl = "http://ddragon.leagueoflegends.com/cdn/10.5.1";
-
-app.get("/api/ddragon/*", (req, res) => {
-  request(
-    `${ddragonBaseUrl}/${req.params[0]}`,
-    (error, response, body) => {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.send(body);
-    }
-  );
+app.get("/ddragon/champion/name/:name/info", (req, res) => {
+  res.send(ddragonHelper.getChampionInfoByName(req.params.name));
 });
-*/
+
+app.get("/ddragon/champion/name/:name/image/full", (req, res) => {
+  res.sendFile(__dirname + ddragonHelper.getChampionFullImagePathByName(req.params.name));
+});
+
 
 app.get("*", (req, res) => {
-  console.log("got a request");
+  res.send("404 ERROR PAGE NOT FOUND");
 });
 
 app.listen(port, () =>

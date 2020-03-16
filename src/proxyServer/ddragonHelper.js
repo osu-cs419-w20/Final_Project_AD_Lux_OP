@@ -10,9 +10,22 @@ const getChampionInfoById = (id) => {
 
 exports.getChampionInfoById = getChampionInfoById;
 
+const getChampionInfoByName = (name) => {
+    return champions.data[name];
+};
+
+exports.getChampionInfoByName = getChampionInfoByName;
+
+
 const getChampionFullImagePathById = (id) => {
     const championInfo = getChampionInfoById(id);
     return '/dragontail-10.5.1/10.5.1/img/champion/' + championInfo.image.full;
 }
 
 exports.getChampionFullImagePathById = getChampionFullImagePathById;
+
+const getChampionFullImagePathByName = (name) => {
+    return '/dragontail-10.5.1/10.5.1/img/champion/' + getChampionInfoByName(name).image.full;
+}
+
+exports.getChampionFullImagePathByName = getChampionFullImagePathByName;

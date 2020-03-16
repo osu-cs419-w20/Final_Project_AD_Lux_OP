@@ -47,8 +47,8 @@ export async function getSummonerbyId(id) {
   return responseBody;
 }
 
-export async function getChampionInfo(id) {
-  const url = baseUrl + "/ddragon/champion/" + id + "/info";
+export async function getChampionInfoById(id) {
+  const url = baseUrl + "/ddragon/champion/id" + id + "/info";
   const response = await fetch(url, {
     method: "GET"
   });
@@ -57,7 +57,25 @@ export async function getChampionInfo(id) {
   return responseBody;
 }
 
-export function getChampionFullImageUrl(id) {
-  const url = baseUrl + 'ddragon/champion/1/image/full';
+export async function getChampionInfoByName(id) {
+  const url = baseUrl + "/ddragon/champion/name" + id + "/info";
+  const response = await fetch(url, {
+    method: "GET"
+  });
+  const responseBody = await response.json();
+  console.log(responseBody);
+  return responseBody;
+}
+
+
+export function getChampionFullImageUrlByName(name) {
+  const url = baseUrl + '/ddragon/champion/name/' + name + '/image/full';
+  console.log(url);
+  return url;
+}
+
+export function getChampionFullImageUrlById(id) {
+  const url = baseUrl + '/ddragon/champion/id/' + id + '/image/full';
+  console.log(url);
   return url;
 }

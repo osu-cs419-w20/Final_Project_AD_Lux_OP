@@ -8,8 +8,10 @@ import {
   getStatsBySummonerId,
   getMatchHistoryBySummonerId,
   getChampionMasterBySummonerId,
-  getChampionInfo,
-  getChampionFullImageUrl
+  getChampionInfoById,
+  getChampionInfoByName,
+  getChampionFullImageUrlByName,
+  getChampionFullImageUrlById
 } from "../api/api";
 
 const styles = css`
@@ -48,6 +50,8 @@ export default function Home({ data }) {
   return (
     <div css={styles}>
       <h1>AD LUX OP</h1>
+      <img src={getChampionFullImageUrlById(1)}/>
+      <img src={getChampionFullImageUrlByName("Aatrox")}/>
       <form
         onSubmit={e => {
           e.preventDefault();
