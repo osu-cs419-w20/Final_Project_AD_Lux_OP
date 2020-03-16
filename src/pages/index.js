@@ -7,7 +7,9 @@ import {
   getSummonerByName,
   getStatsBySummonerId,
   getMatchHistoryBySummonerId,
-  getChampionMasterBySummonerId
+  getChampionMasterBySummonerId,
+  getChampionInfo,
+  getChampionFullImageUrl
 } from "../api/api";
 
 const styles = css`
@@ -42,8 +44,6 @@ export default function Home({ data }) {
       router.push(`/summoner/${responseBody.id}`);
     }
   }
-
-  console.log(data);
 
   return (
     <div css={styles}>
