@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import SummonerStats from "../../../components/SummonerStats";
 import Spinner from "../../../components/Spinner";
-import { getStatsBySummonerId } from "../../../api/api";
+import { getStatsBySummonerId, getSummonerById } from "../../../api/api";
 
 const container = css`
   padding-right: 440px;
@@ -42,10 +42,21 @@ function Summoner() {
             console.log(responseBody[1]);
             setRankedSoloDuoStats(responseBody[1]);
           }
+
           setIsLoading(false);
         }
       }
+      async function getSummonerIcon() {
+        const responseBody = await getSummonerbyId(summonerID);
+        if (responseBody) {
+          if (responseBody[0]) {
+            console.log("getting profile icon");
+            console.log(responseBody[0]);
+          }
+        }
+      }
       getSummonerStats();
+      getSummonerIcon();
     }
   }, [summonerID]);
 
@@ -58,6 +69,7 @@ function Summoner() {
           <div>
             <Name>{rankedFlexStats.summonerName}</Name>
           </div>
+          <img src="https://opgg-static.akamaized.net/images/profile_icons/profileIcon594.jpg"/>
 
           <SummonerStats
             flexStats={rankedFlexStats ? rankedFlexStats : null}

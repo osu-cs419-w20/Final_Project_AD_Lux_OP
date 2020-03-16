@@ -29,6 +29,7 @@ function MatchHistory() {
   const [accountId, setAccountID] = useState("");
   const [summonerName, setSummonerName] = useState("");
   const [matchHistory, setMatchHistory] = useState([]);
+  const [profileId, setProfileID] = useState("");
   const { summonerID } = router.query;
 
   // get summoner stuff by id. then get match history off ACCOUNT id./
