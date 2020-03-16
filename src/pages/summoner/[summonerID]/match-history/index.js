@@ -9,7 +9,7 @@ import {
   getSummonerbyId
 } from "../../../../api/api";
 import _ from "lodash";
-import MatchCard from "../../../../components/MatchCArd";
+import MatchCard from "../../../../components/MatchCard";
 
 const Name = styled.h1`
   align-self: center;

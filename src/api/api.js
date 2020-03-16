@@ -1,12 +1,12 @@
 const baseUrl = "http://localhost:8080";
-const riotEndpoint = "/riot";
 
 export async function getSummonerByName(name) {
-  const url = baseUrl + riotEndpoint + "/riot/lol/summoner/v4/summoners/by-name/" + name;
+  const url = baseUrl + "/riot/lol/summoner/v4/summoners/by-name/" + name;
   const response = await fetch(url, {
     method: "GET"
   });
   const responseBody = await response.json();
+  console.log('responseBody' + responseBody);
   return responseBody;
 }
 
