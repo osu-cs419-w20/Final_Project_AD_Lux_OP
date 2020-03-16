@@ -25,6 +25,7 @@ const container = css`
     font-size: 16px;
     margin: auto;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 `;
 
