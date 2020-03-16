@@ -24,7 +24,7 @@ function Summoner() {
   const { summonerID } = router.query;
   const [rankedFlexStats, setRankedFlexStats] = useState({});
   const [rankedSoloDuoStats, setRankedSoloDuoStats] = useState({});
-  const [profileID, setProfileID] = useState({});
+  const [summonerInfo, setSummonerInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   var iconBaseUrl = "https://opgg-static.akamaized.net/images/profile_icons/profileIcon";
@@ -51,23 +51,24 @@ function Summoner() {
           setIsLoading(false);
         }
       }
-      async function getSummonerIcon() {
+      async function getSummonerInfo() {
         const responseBody = await getSummonerById(summonerID);
         if (responseBody) {
             console.log("getting profile icon");
             console.log(responseBody);
-            setProfileID(responseBody);
+            setSummonerInfo(responseBody);
         }
       }
       getSummonerStats();
-      getSummonerIcon();
+      getSummonerInfo();
     }
   }, [summonerID]);
 
-  console.log(profileID.profileIconId);
-  iconID = profileID.profileIconId;
+  console.log(summonerInfo.profileIconId);
+  iconID = summonerInfo.profileIconId;
   var finalIconUrl = iconBaseUrl.concat(iconID).concat(iconFormat);
   console.log(finalIconUrl);
+  console.log(summonerInfo.summonerLevel);
 
   return (
     <div css={container}>
@@ -79,6 +80,9 @@ function Summoner() {
             <Name>{rankedFlexStats.summonerName}</Name>
           </div>
           <img src={finalIconUrl} height="100" width="100"/>
+          <div>
+            <h2>Current Level: {summonerInfo.summonerLevel}</h2>
+          </div>
 
           <SummonerStats
             flexStats={rankedFlexStats ? rankedFlexStats : null}
