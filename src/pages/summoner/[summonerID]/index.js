@@ -27,9 +27,9 @@ function Summoner() {
   const [summonerInfo, setSummonerInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  var iconBaseUrl = "https://opgg-static.akamaized.net/images/profile_icons/profileIcon";
+  var iconBaseUrl = "http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/";
   var iconID = "";
-  var iconFormat = ".jpg";
+  var iconFormat = ".png";
 
   useEffect(() => {
     if (summonerID) {
