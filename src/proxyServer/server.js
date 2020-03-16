@@ -6,9 +6,8 @@ const ddragonHelper = require("./ddragonHelper");
 const app = express();
 const port = 8080;
 
-
 const riotBaseUrl = "https://na1.api.riotgames.com";
-const riotApiKey = "RGAPI-6a16fd84-8670-4615-9cf0-dd93162df7ff";
+const riotApiKey = "RGAPI-a43f9713-d3ac-471c-ab17-46f842f16ce9";
 
 app.get("/riot/*", (req, res) => {
   request(
@@ -21,21 +20,35 @@ app.get("/riot/*", (req, res) => {
 });
 
 app.get("/ddragon/champion/id/:id/info", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.send(ddragonHelper.getChampionInfoById(req.params.id));
 });
 
 app.get("/ddragon/champion/id/:id/image/full", (req, res) => {
-  res.sendFile(__dirname + ddragonHelper.getChampionFullImagePathById(req.params.id));
+  res.header("Access-Control-Allow-Origin", "*");
+  res.sendFile(
+    __dirname + ddragonHelper.getChampionFullImagePathById(req.params.id)
+  );
 });
 
 app.get("/ddragon/champion/name/:name/info", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.send(ddragonHelper.getChampionInfoByName(req.params.name));
 });
 
 app.get("/ddragon/champion/name/:name/image/full", (req, res) => {
-  res.sendFile(__dirname + ddragonHelper.getChampionFullImagePathByName(req.params.name));
+  res.header("Access-Control-Allow-Origin", "*");
+  res.sendFile(
+    __dirname + ddragonHelper.getChampionFullImagePathByName(req.params.name)
+  );
 });
 
+app.get("/ddragon/item/id/:id/image/full", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.sendFile(
+    __dirname + ddragonHelper.getItemFullImagePathById(req.params.id)
+  );
+});
 
 app.get("*", (req, res) => {
   res.send("404 ERROR PAGE NOT FOUND");

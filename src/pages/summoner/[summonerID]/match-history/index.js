@@ -8,6 +8,8 @@ import {
   getMatchHistoryBySummonerId,
   getSummonerbyId
 } from "../../../../api/api";
+import _ from "lodash";
+import MatchCard from "../../../../components/MatchCArd";
 
 const Name = styled.h1`
   align-self: center;
@@ -26,6 +28,7 @@ function MatchHistory() {
   const [loading, setIsLoading] = useState(true);
   const [accountId, setAccountID] = useState("");
   const [summonerName, setSummonerName] = useState("");
+  const [matchHistory, setMatchHistory] = useState([]);
   const { summonerID } = router.query;
 
   // get summoner stuff by id. then get match history off ACCOUNT id./
@@ -51,6 +54,7 @@ function MatchHistory() {
         );
         if (matchHistoryResponse) {
           console.log("MATCHHIST: ", matchHistoryResponse);
+          setMatchHistory(_.slice(matchHistoryResponse.matches, 0, 10));
         }
         setIsLoading(false);
       }
@@ -63,9 +67,21 @@ function MatchHistory() {
       {loading ? (
         <Spinner />
       ) : (
-        <div>
-          <Name>{summonerName}: Match History</Name>
-        </div>
+        <>
+          <div>
+            <Name>{summonerName}: Match History (Last 10 Games)</Name>
+          </div>
+          {matchHistory.map((match, i) => {
+            console.log("match", match);
+            return (
+              <MatchCard
+                key={i}
+                game={match.gameId}
+                summonerName={summonerName}
+              />
+            );
+          })}
+        </>
       )}
     </div>
   );
