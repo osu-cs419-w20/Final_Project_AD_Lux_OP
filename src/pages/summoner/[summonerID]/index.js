@@ -13,6 +13,10 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+
 
   button {
     background-color: #4caf50; /* Green */

@@ -15,6 +15,14 @@ import {
 } from "../api/api";
 
 const styles = css`
+  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+  height:100%;
+  margin-top: 0;
+  padding: 0;
+  position: absolute;
+
   h1 {
     text-align: center;
   }
@@ -31,6 +39,7 @@ const styles = css`
     padding: 15px 30px;
     text-align: center;
     display: block;
+    color: white;
   }
 
   input {
@@ -50,7 +59,7 @@ const styles = css`
   }
 
   input:focus{
-    width:100%;
+    width:50%;
   }
 
   ul {
@@ -78,7 +87,6 @@ const styles = css`
   li:last-child {
     border-bottom: none;
   }
-
 
   button {
     background-color: #4CAF50; /* Green */
@@ -125,7 +133,6 @@ export default function Home({ data }) {
           onChange={e => setSummonerName(e.target.value)}
         />
         <button type="submit">Search</button>
-
       </form>
     </div>
   );
