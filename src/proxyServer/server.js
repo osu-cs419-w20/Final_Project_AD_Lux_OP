@@ -7,7 +7,7 @@ const port = 8080;
 
 const router = require('./api/index');
 
-app.use(morgan("default"));
+app.use(morgan(':method :url :status :res[content-length]'));
 app.use(bodyParser.json());
 
 app.use('/', router);

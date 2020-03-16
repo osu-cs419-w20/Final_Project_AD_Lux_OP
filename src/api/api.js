@@ -6,7 +6,6 @@ export async function getSummonerByName(name) {
     method: "GET"
   });
   const responseBody = await response.json();
-  console.log('responseBody' + responseBody);
   return responseBody;
 }
 
@@ -21,7 +20,6 @@ export async function getStatsBySummonerId(id) {
 
 export async function getMatchHistoryBySummonerId(id) {
   const url = baseUrl + "/riot/lol/match/v4/matchlists/by-account/" + id;
-  console.log("ID: ", id);
   const response = await fetch(url, {
     method: "GET"
   });
@@ -76,17 +74,15 @@ export async function getChampionInfoByName(id) {
 
 export function getChampionFullImageUrlByName(name) {
   const url = baseUrl + '/assets/champion/name/' + name + '/image';
-  console.log(url);
   return url;
 }
 
 export function getChampionFullImageUrlById(id) {
   const url = baseUrl + '/assets/champion/id/' + id + '/image';
-  console.log(url);
   return url;
 }
 
 export function getItemFullImageUrlById(id) {
-  const url = baseUrl + "/ddragon/item/id/" + id + "/image/full";
+  const url = baseUrl + "/assets/item/id/" + id + "/image";
   return url;
 }
