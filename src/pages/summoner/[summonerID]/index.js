@@ -1,10 +1,23 @@
 /** @jsx jsx */
 import React, { useEffect, useState } from "react";
 import { css, jsx, Global } from "@emotion/core";
+import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import SummonerStats from "../../../components/SummonerStats";
 import Spinner from "../../../components/Spinner";
 import { getStatsBySummonerId } from "../../../api/api";
+
+const container = css`
+  padding-right: 440px;
+  padding-left: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Name = styled.h1`
+  align-self: center;
+`;
 
 function Summoner() {
   const router = useRouter();
@@ -18,7 +31,6 @@ function Summoner() {
       async function getSummonerStats() {
         const responseBody = await getStatsBySummonerId(summonerID);
         if (responseBody) {
-          console.log("RESPONSE!");
           console.log(responseBody);
           if (responseBody[0]) {
             console.log("has flex stats");
@@ -38,18 +50,27 @@ function Summoner() {
   }, [summonerID]);
 
   return (
-    <div>
-      <h1>Summoner with id: {summonerID}</h1>
+    <div css={container}>
       {isLoading ? (
         <Spinner />
       ) : (
-        <SummonerStats
-          flexStats={rankedFlexStats ? rankedFlexStats : null}
-          soloDuoStats={rankedSoloDuoStats ? rankedSoloDuoStats : null}
-        />
+        <>
+          <div>
+            <Name>{rankedFlexStats.summonerName}</Name>
+          </div>
+
+          <SummonerStats
+            flexStats={rankedFlexStats ? rankedFlexStats : null}
+            soloDuoStats={rankedSoloDuoStats ? rankedSoloDuoStats : null}
+          />
+        </>
       )}
-      <button onClick={() => router.push(`${router.asPath}/mastery`)}>
-        to Masteries
+      <button
+        onClick={() => {
+          router.push(`/summoner/${summonerID}/match-history`);
+        }}
+      >
+        View Match History
       </button>
     </div>
   );

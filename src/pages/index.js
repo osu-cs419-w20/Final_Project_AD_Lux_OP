@@ -7,7 +7,11 @@ import {
   getSummonerByName,
   getStatsBySummonerId,
   getMatchHistoryBySummonerId,
-  getChampionMasterBySummonerId
+  getChampionMasterBySummonerId,
+  getChampionInfoById,
+  getChampionInfoByName,
+  getChampionFullImageUrlByName,
+  getChampionFullImageUrlById
 } from "../api/api";
 
 const styles = css`
@@ -39,17 +43,15 @@ export default function Home({ data }) {
   async function getSummonerID(summonerName) {
     const responseBody = await getSummonerByName(summonerName);
     if (responseBody) {
-      console.log("REEEEEEEEEEEEEEEEEEEEE");
-      console.log(("RECEIVED", responseBody.id));
       router.push(`/summoner/${responseBody.id}`);
     }
   }
 
-  console.log(data);
-
   return (
     <div css={styles}>
       <h1>AD LUX OP</h1>
+      <img src={getChampionFullImageUrlById(1)}/>
+      <img src={getChampionFullImageUrlByName("Aatrox")}/>
       <form
         onSubmit={e => {
           e.preventDefault();
