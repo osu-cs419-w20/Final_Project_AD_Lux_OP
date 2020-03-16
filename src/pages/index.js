@@ -15,10 +15,9 @@ import {
 } from "../api/api";
 
 const styles = css`
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
+  h1 {
+    text-align: center;
+  }
 
   img {
     display: block;
@@ -46,11 +45,48 @@ const styles = css`
     background-repeat: no-repeat;
     padding: 12px;
     transition: width 0.4s ease-in-out;
+    margin: auto;
+    display: block;
   }
 
   input:focus{
     width:100%;
   }
+
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li {
+  text-align: center;
+  border-bottom: 1px solid #555;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
 
   button {
     background-color: #4CAF50; /* Green */
@@ -81,6 +117,7 @@ export default function Home({ data }) {
   return (
     <div css={styles}>
       <h1>AD LUX OP</h1>
+      <ul><li><a href="/free-champions">Free Champion</a></li></ul>
       <img src="https://i.pinimg.com/originals/d7/4a/c7/d74ac7338668caa0cbbbc85a06dfd24f.png"/>
       <form
         onSubmit={e => {
@@ -96,6 +133,7 @@ export default function Home({ data }) {
           onChange={e => setSummonerName(e.target.value)}
         />
         <button type="submit">Search</button>
+
       </form>
     </div>
   );

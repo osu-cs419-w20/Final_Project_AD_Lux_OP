@@ -11,7 +11,7 @@ export async function getSummonerByName(name) {
 
 export async function getSummonerById(id) {
   const url =
-    baseUrl + riotEndpoint + "/lol/summoner/v4/summoners/" + id;
+    baseUrl + "/riot/lol/summoner/v4/summoners/" + id;
   const response = await fetch(url, {
     method: "GET"
   });
