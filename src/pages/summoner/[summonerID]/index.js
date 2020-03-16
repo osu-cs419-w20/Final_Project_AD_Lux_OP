@@ -24,6 +24,7 @@ function Summoner() {
   const { summonerID } = router.query;
   const [rankedFlexStats, setRankedFlexStats] = useState({});
   const [rankedSoloDuoStats, setRankedSoloDuoStats] = useState({});
+  const [profileID, setProfileID] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   var iconBaseUrl = "https://opgg-static.akamaized.net/images/profile_icons/profileIcon";
@@ -53,11 +54,9 @@ function Summoner() {
       async function getSummonerIcon() {
         const responseBody = await getSummonerById(summonerID);
         if (responseBody) {
-          if (responseBody[0]) {
             console.log("getting profile icon");
-            console.log(responseBody[0]);
-            iconID = 594;
-          }
+            console.log(responseBody);
+            setProfileID(responseBody);
         }
       }
       getSummonerStats();
@@ -65,7 +64,10 @@ function Summoner() {
     }
   }, [summonerID]);
 
+  console.log(profileID.profileIconId);
+  iconID = profileID.profileIconId;
   var finalIconUrl = iconBaseUrl.concat(iconID).concat(iconFormat);
+  console.log(finalIconUrl);
 
   return (
     <div css={container}>
