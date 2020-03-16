@@ -51,7 +51,7 @@ function Summoner() {
         }
       }
       async function getSummonerIcon() {
-        const responseBody = await getSummonerbyId(summonerID);
+        const responseBody = await getSummonerById(summonerID);
         if (responseBody) {
           if (responseBody[0]) {
             console.log("getting profile icon");
