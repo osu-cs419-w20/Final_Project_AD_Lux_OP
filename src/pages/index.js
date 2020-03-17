@@ -19,8 +19,7 @@ const styles = css`
   background-repeat: no-repeat;
   background-color: black;
   height:100%;
-  margin-top: 0;
-  padding: 0;
+  width: 100%;
   position: absolute;
 
   h1 {
