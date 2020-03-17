@@ -82,6 +82,15 @@ export async function getChampionInfoByName(id) {
   return responseBody;
 }
 
+export async function getChampionRotation() {
+  const url = baseUrl + "/riot/lol/platform/v3/champion-rotations";
+  const response = await fetch(url, {
+    method: "GET"
+  });
+  const responseBody = await response.json();
+  return responseBody;
+}
+
 export function getChampionFullImageUrlByName(name) {
   const url = baseUrl + '/assets/champion/name/' + name + '/image';
   return url;
