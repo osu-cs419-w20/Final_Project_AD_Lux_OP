@@ -25,7 +25,7 @@ const container = css`
   background-repeat: no-repeat;
   background-color: black;
   position: absolute;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 function MatchHistory() {

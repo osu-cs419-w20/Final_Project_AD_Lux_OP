@@ -21,7 +21,7 @@ const styles = css`
   height:100%;
   width: 100%;
   position: absolute;
-  overflow: scroll;
+  overflow: auto;
 
 
   h1 {
