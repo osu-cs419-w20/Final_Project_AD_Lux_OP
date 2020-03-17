@@ -31,6 +31,7 @@ const container = css`
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius: 10px;
   }
 `;
 

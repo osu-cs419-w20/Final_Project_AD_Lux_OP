@@ -57,6 +57,7 @@ const styles = css`
     transition: width 0.4s ease-in-out;
     margin: auto;
     display: block;
+    border-radius: 10px;
   }
 
   input:focus {
@@ -71,6 +72,7 @@ const styles = css`
     background-color: #f1f1f1;
     border: 1px solid #555;
     display: block;
+    border-radius: 10px;
   }
 
   li a {
@@ -100,6 +102,7 @@ const styles = css`
     font-size: 16px;
     margin: auto;
     margin-top: 10px;
+    border-radius: 10px;
   }
 `;
 
