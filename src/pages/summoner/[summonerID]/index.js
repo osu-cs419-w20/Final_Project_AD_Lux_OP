@@ -132,6 +132,13 @@ function Summoner() {
       >
         View Match History
       </button>
+      <button
+        onClick={() => {
+          router.push(`/summoner/${summonerID}/mastery`);
+        }}
+      >
+        View Mastery
+      </button>
     </div>
   );
 }

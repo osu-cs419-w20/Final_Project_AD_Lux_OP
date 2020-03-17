@@ -37,7 +37,7 @@ export async function getMatchHistoryBySummonerId(id) {
   return responseBody;
 }
 
-export async function getChampionMasterBySummonerId(id) {
+export async function getChampionMasteriesBySummonerId(id) {
   const url = baseUrl + "/riot/lol/champion-mastery/v4/champion-masteries/by-summoner/" + id;
   const response = await fetch(url, {
     method: "GET"
