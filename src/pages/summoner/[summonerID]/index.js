@@ -15,7 +15,6 @@ const container = css`
   background-repeat: no-repeat;
   background-color: black;
   height: 100%;
-  position: fixed;
   width: 100%;
 
 
