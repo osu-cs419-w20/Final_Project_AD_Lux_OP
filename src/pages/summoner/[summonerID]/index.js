@@ -19,7 +19,6 @@ const container = css`
   position: absolute;
   overflow: auto;
 
-
   button {
     background-color: #4caf50; /* Green */
     border: none;
@@ -37,12 +36,13 @@ const container = css`
 
 const ImgContainer = styled.div`
   overflow: hidden;
-  height: 100px;
-  width: 100px;
+  min-height: 100px;
+  min-width: 100px;
   border-radius: 5px;
 `;
 
 const Name = styled.h1`
+  color: white;
   align-self: center;
 `;
 
@@ -113,7 +113,9 @@ function Summoner() {
             <img src={finalIconUrl} height="100" width="100" />
           </ImgContainer>
           <div>
-            <h2>Current Level: {summonerInfo.summonerLevel}</h2>
+            <h2 style={{ color: "white" }}>
+              Current Level: {summonerInfo.summonerLevel}
+            </h2>
           </div>
 
           <SummonerStats

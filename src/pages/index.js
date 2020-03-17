@@ -18,7 +18,7 @@ const styles = css`
   background-image: url("https://i.imgur.com/voR8Lgi.jpg");
   background-repeat: no-repeat;
   background-color: black;
-  height:100%;
+  height: 100%;
   width: 100%;
   position: absolute;
   overflow: auto;
@@ -50,7 +50,7 @@ const styles = css`
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('searchicon.png');
+    background-image: url("searchicon.png");
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px;
@@ -59,8 +59,8 @@ const styles = css`
     display: block;
   }
 
-  input:focus{
-    width:50%;
+  input:focus {
+    width: 50%;
   }
 
   ul {
@@ -90,7 +90,7 @@ const styles = css`
   }
 
   button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4caf50; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -101,6 +101,10 @@ const styles = css`
     margin: auto;
     margin-top: 10px;
   }
+`;
+
+const title = css`
+  color: white;
 `;
 
 export default function Home({ data }) {
@@ -117,9 +121,13 @@ export default function Home({ data }) {
 
   return (
     <div css={styles}>
-      <h1>AD LUX OP</h1>
-      <ul><li><a href="/free-champions">Free Champion</a></li></ul>
-      <img src="https://i.pinimg.com/originals/d7/4a/c7/d74ac7338668caa0cbbbc85a06dfd24f.png"/>
+      <h1 css={title}>AD LUX OP</h1>
+      <ul>
+        <li>
+          <a href="/free-champions">Free Champion</a>
+        </li>
+      </ul>
+      <img src="https://i.pinimg.com/originals/d7/4a/c7/d74ac7338668caa0cbbbc85a06dfd24f.png" />
       <form
         onSubmit={e => {
           e.preventDefault();
