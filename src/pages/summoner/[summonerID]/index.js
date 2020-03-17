@@ -5,17 +5,45 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import SummonerStats from "../../../components/SummonerStats";
 import Spinner from "../../../components/Spinner";
-import { getStatsBySummonerId } from "../../../api/api";
+import { getStatsBySummonerId, getSummonerById } from "../../../api/api";
 
 const container = css`
-  padding-right: 440px;
-  padding-left: 440px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+  position: absolute;
+  overflow: auto;
+
+  button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+`;
+
+const ImgContainer = styled.div`
+  overflow: hidden;
+  min-height: 100px;
+  min-width: 100px;
+  border-radius: 5px;
 `;
 
 const Name = styled.h1`
+  color: white;
   align-self: center;
 `;
 
@@ -24,7 +52,13 @@ function Summoner() {
   const { summonerID } = router.query;
   const [rankedFlexStats, setRankedFlexStats] = useState({});
   const [rankedSoloDuoStats, setRankedSoloDuoStats] = useState({});
+  const [summonerInfo, setSummonerInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  var iconBaseUrl =
+    "http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/";
+  var iconID = "";
+  var iconFormat = ".png";
 
   useEffect(() => {
     if (summonerID) {
@@ -41,13 +75,31 @@ function Summoner() {
             console.log("has soloduo stats");
             console.log(responseBody[1]);
             setRankedSoloDuoStats(responseBody[1]);
+          } else {
+            setRankedFlexStats("Unranked");
+            setRankedSoloDuoStats("Unranked");
           }
           setIsLoading(false);
         }
       }
+      async function getSummonerInfo() {
+        const responseBody = await getSummonerById(summonerID);
+        if (responseBody) {
+          console.log("getting profile icon");
+          console.log(responseBody);
+          setSummonerInfo(responseBody);
+        }
+      }
       getSummonerStats();
+      getSummonerInfo();
     }
   }, [summonerID]);
+
+  console.log(summonerInfo.profileIconId);
+  iconID = summonerInfo.profileIconId;
+  var finalIconUrl = iconBaseUrl.concat(iconID).concat(iconFormat);
+  console.log(finalIconUrl);
+  console.log(summonerInfo.summonerLevel);
 
   return (
     <div css={container}>
@@ -56,7 +108,15 @@ function Summoner() {
       ) : (
         <>
           <div>
-            <Name>{rankedFlexStats.summonerName}</Name>
+            <Name>{summonerInfo.name}</Name>
+          </div>
+          <ImgContainer>
+            <img src={finalIconUrl} height="100" width="100" />
+          </ImgContainer>
+          <div>
+            <h2 style={{ color: "white" }}>
+              Current Level: {summonerInfo.summonerLevel}
+            </h2>
           </div>
 
           <SummonerStats

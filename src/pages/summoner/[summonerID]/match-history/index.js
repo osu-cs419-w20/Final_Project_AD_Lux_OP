@@ -13,14 +13,20 @@ import MatchCard from "../../../../components/MatchCard";
 
 const Name = styled.h1`
   align-self: center;
+  color: white;
 `;
 
 const container = css`
-  padding-right: 440px;
-  padding-left: 440px;
+  height:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+  position: absolute;
+  overflow: auto;
 `;
 
 function MatchHistory() {
@@ -40,7 +46,9 @@ function MatchHistory() {
       const summonerInfo = await getSummonerbyId(summonerID);
       setSummonerName(summonerInfo.name);
       if (summonerInfo) {
-        const matchHistory = (await getMatchHistoryBySummonerId(summonerInfo.accountId)).matches;
+        const matchHistory = (
+          await getMatchHistoryBySummonerId(summonerInfo.accountId)
+        ).matches;
         setMatchHistory(_.slice(matchHistory, 0, 10));
         setIsLoading(false);
       }
@@ -60,11 +68,7 @@ function MatchHistory() {
           </div>
           {matchHistory.map((match, i) => {
             return (
-              <MatchCard
-                key={i}
-                match={match}
-                summonerName={summonerName}
-              />
+              <MatchCard key={i} match={match} summonerName={summonerName} />
             );
           })}
         </>

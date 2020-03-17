@@ -26,24 +26,32 @@ function createItemArray(stats) {
 }
 
 const Item = styled.img`
-  padding: 5px;
+  display: block;
+  margin: 0 auto;
 `;
 
 const ImageBox = styled.div`
-  height: 74px;
-  width: 74px;
+  overflow: hidden;
+  height: 64px;
+  width: 64px;
   background-color: grey;
-  border-radius: 5px;
-  margin: 3px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
 `;
 
 const EmptyImage = styled.div`
   height: 74px;
   width: 74px;
   background-color: grey;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
+const ImageContainer = styled.div``;
 
 const ItemContainer = styled.div`
   display: flex;
@@ -56,11 +64,13 @@ export default function ItemBar({ stats }) {
     <ItemContainer>
       {itemsArray.map((item, i) => {
         return item !== "0" ? (
-          <ImageBox key={i}>
-            <Item src={item}/>
-          </ImageBox>
+          <EmptyImage>
+            <ImageBox key={i}>
+              <Item src={item} />
+            </ImageBox>
+          </EmptyImage>
         ) : (
-          <EmptyImage key={i}/>
+          <EmptyImage key={i} />
         );
       })}
     </ItemContainer>

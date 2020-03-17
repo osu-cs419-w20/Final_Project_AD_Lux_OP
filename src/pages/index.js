@@ -15,24 +15,99 @@ import {
 } from "../api/api";
 
 const styles = css`
-  margin: 0px;
-  padding: 0px;
+  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: auto;
 
-  img {
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
 
-    /* Full height */
-    height: 100%;
-    width: auto;
-
+  h1 {
     text-align: center;
   }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  label {
+    margin: auto;
+    padding: 15px 30px;
+    text-align: center;
+    display: block;
+    color: white;
+  }
+
+  input {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("searchicon.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px;
+    transition: width 0.4s ease-in-out;
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+  }
+
+  input:focus {
+    width: 50%;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    border: 1px solid #555;
+    display: block;
+    border-radius: 10px;
+  }
+
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+  li {
+    text-align: center;
+    border-bottom: 1px solid #555;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+  button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+`;
+
+const title = css`
+  color: white;
 `;
 
 export default function Home({ data }) {
@@ -49,9 +124,13 @@ export default function Home({ data }) {
 
   return (
     <div css={styles}>
-      <h1>AD LUX OP</h1>
-      <img src={getChampionFullImageUrlById(1)}/>
-      <img src={getChampionFullImageUrlByName("Aatrox")}/>
+      <h1 css={title}>AD LUX OP</h1>
+      <ul>
+        <li>
+          <a href="/free-champions">Free Champion</a>
+        </li>
+      </ul>
+      <img src="https://i.pinimg.com/originals/d7/4a/c7/d74ac7338668caa0cbbbc85a06dfd24f.png" />
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -59,11 +138,13 @@ export default function Home({ data }) {
           // router.push(`/summoner/${summonerID}`);
         }}
       >
+        <label>Summoner Name</label>
         <input
+          placeholder="Search summoner name"
           value={summonerName}
           onChange={e => setSummonerName(e.target.value)}
         />
-        <button type="submit">Go!</button>
+        <button type="submit">Search</button>
       </form>
     </div>
   );

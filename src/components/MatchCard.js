@@ -42,6 +42,9 @@ const summonerInfo = css`
   border-radius: 25px;
   padding: 15px;
   margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 
 export default function MatchCard({ match, summonerName }) {
@@ -52,30 +55,34 @@ export default function MatchCard({ match, summonerName }) {
   useEffect(() => {
     async function getMatchDetails() {
       setIsLoading(true);
-  
-      if(!match) {
+
+      if (!match) {
         return;
       }
-  
+
       let gameInfo = {};
-  
+
       const matchDetails = await getMatchInfoByMatchId(match.gameId);
       const champInfo = await getChampionInfoById(match.champion);
       const champImageUrl = await getChampionFullImageUrlById(match.champion);
-  
-      const participantInfo = matchDetails.participantIdentities.find(element => element.player.summonerName === summonerName);
-      const stats = matchDetails.participants.find(element => element.participantId == participantInfo.participantId);
-  
+
+      const participantInfo = matchDetails.participantIdentities.find(
+        element => element.player.summonerName === summonerName
+      );
+      const stats = matchDetails.participants.find(
+        element => element.participantId == participantInfo.participantId
+      );
+
       gameInfo = {
-        "champion": champInfo,
-        "stats": stats.stats
+        champion: champInfo,
+        stats: stats.stats
       };
-  
+
       setChampImg(champImageUrl);
       setGameInfo(gameInfo);
       setIsLoading(false);
     }
-    
+
     getMatchDetails();
   }, [match]);
 
@@ -100,7 +107,9 @@ export default function MatchCard({ match, summonerName }) {
                 Damage Dealt To Champions:{" "}
                 {gameInfo.stats.totalDamageDealtToChampions}
               </h2>
-              <h2>Largest Killing Spree: {gameInfo.stats.largestKillingSpree}</h2>
+              <h2>
+                Largest Killing Spree: {gameInfo.stats.largestKillingSpree}
+              </h2>
               <h2>Largest Multi Kill: {gameInfo.stats.largestMultiKill}</h2>
               <h2>Gold Earned: {gameInfo.stats.goldEarned}</h2>
               <ItemBar stats={gameInfo.stats} />
