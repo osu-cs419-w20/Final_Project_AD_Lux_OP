@@ -16,14 +16,16 @@ const Name = styled.h1`
 `;
 
 const container = css`
-  padding-right: 440px;
-  padding-left: 440px;
+  height:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: url("https://i.imgur.com/voR8Lgi.jpg");
   background-repeat: no-repeat;
   background-color: black;
+  position: absolute;
+  overflow: scroll;
 `;
 
 function MatchHistory() {

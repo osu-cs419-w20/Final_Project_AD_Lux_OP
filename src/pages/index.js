@@ -21,6 +21,8 @@ const styles = css`
   height:100%;
   width: 100%;
   position: absolute;
+  overflow: scroll;
+
 
   h1 {
     text-align: center;

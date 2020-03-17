@@ -8,14 +8,16 @@ import Spinner from "../../../components/Spinner";
 import { getStatsBySummonerId, getSummonerById } from "../../../api/api";
 
 const container = css`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: url("https://i.imgur.com/voR8Lgi.jpg");
   background-repeat: no-repeat;
   background-color: black;
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  overflow: scroll;
 
 
   button {
