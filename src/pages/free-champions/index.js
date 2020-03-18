@@ -10,10 +10,12 @@ import { getChampionRotation } from "../../api/api";
 import ChampionList from '../../components/championList';
 
 const styles = css`
-  margin: 10px;
+  margin-left: 60px;
+  margin-right: 60px;
   padding: auto;
   display: block;
   justify-content: center;
+  flex-direction: column
   overflow: auto;
 `;
 
