@@ -108,6 +108,7 @@ function Summoner() {
       ) : (
         <>
           <div>
+            <button onClick={() => {router.push('/')}}>Back</button>
             <Name>{summonerInfo.name}</Name>
           </div>
           <ImgContainer>
