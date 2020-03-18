@@ -27,6 +27,21 @@ const container = css`
   background-color: black;
   position: absolute;
   overflow: auto;
+
+  button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
 `;
 
 function MatchHistory() {
@@ -57,6 +72,9 @@ function MatchHistory() {
     getMatchHistory();
   }, [summonerID]);
 
+  var backUrl = "/summoner/".concat(summonerID);
+  console.log(backUrl);
+
   return (
     <div css={container}>
       {loading ? (
@@ -64,6 +82,7 @@ function MatchHistory() {
       ) : (
         <>
           <div>
+            <button onClick={() => {router.push(backUrl)}}>Back</button>
             <Name>{summonerName}: Match History (Last 10 Games)</Name>
           </div>
           {matchHistory.map((match, i) => {

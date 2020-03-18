@@ -13,11 +13,14 @@ export default function ChampionMasteryCard({masteryInfo}) {
         background-color: lightgrey;
         border: 2px solid lightgrey;
         border-radius: 25px;
-        padding: 10px;
-        margin: 10px;
+        padding: 20px;
+        margin: auto;
+        margin-bottom: 20px;
+        overflow: auto;
+        width: 45%;
+        display: block;
 
         img {
-            overflow: hidden;
             height: 120px;
             width: 120px;
             border-radius: 5px;
