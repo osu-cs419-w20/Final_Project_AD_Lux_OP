@@ -22,22 +22,30 @@ export default function ChampionCard({id}) {
             width: 120px;
             border-radius: 5px;
         }
+
+        label {
+          text-align: center;
+          display: block;
+        }
     `;
 
     useEffect(() => {
         async function getChampionData() {
             const newChampionInfo = await getChampionInfoById(id);
             setChampionInfo(newChampionInfo);
+            console.log(newChampionInfo);
 
             const newChampionImage = await getChampionFullImageUrlById(id);
             setChampionImage(newChampionImage);
         }
         getChampionData();
+
     }, []);
 
     return (
         <div css={styles}>
             <img src={championImage}/>
+            <label>{championInfo.name}</label>
         </div>
     );
 }
