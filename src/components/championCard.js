@@ -33,14 +33,13 @@ export default function ChampionCard({id}) {
         async function getChampionData() {
             const newChampionInfo = await getChampionInfoById(id);
             setChampionInfo(newChampionInfo);
-            console.log(newChampionInfo);
 
             const newChampionImage = await getChampionFullImageUrlById(id);
             setChampionImage(newChampionImage);
         }
         getChampionData();
 
-    }, []);
+    }, [id]);
 
     return (
         <div css={styles}>

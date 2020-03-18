@@ -9,7 +9,8 @@ export default css`
     background-image: url("https://i.imgur.com/voR8Lgi.jpg");
     background-repeat: no-repeat;
     background-color: black;
+    background-size: 100% auto;
     width: 100%;
-    height: 100%;  
+    height: 100%;
   }
 `

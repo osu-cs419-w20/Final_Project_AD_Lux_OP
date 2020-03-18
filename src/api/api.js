@@ -101,6 +101,12 @@ export function getChampionFullImageUrlById(id) {
   return url;
 }
 
+export function getChampionTileImageUrlById(id) {
+  const url = baseUrl + '/assets/champion/id/' + id + '/image/tile';
+  return url;
+}
+
+
 export function getItemFullImageUrlById(id) {
   const url = baseUrl + "/assets/item/id/" + id + "/image";
   return url;

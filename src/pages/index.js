@@ -15,9 +15,6 @@ import {
 } from "../api/api";
 
 const styles = css`
-  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
-  background-repeat: no-repeat;
-  background-color: black;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -64,31 +61,11 @@ const styles = css`
     width: 50%;
   }
 
-  ul {
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-    border: 1px solid #555;
+  a {
+    margin-top: 10px;
+    color: white;
     display: block;
-    border-radius: 10px;
-  }
-
-  li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-  }
-
-  li {
     text-align: center;
-    border-bottom: 1px solid #555;
-  }
-
-  li:last-child {
-    border-bottom: none;
   }
 
   button {
@@ -104,6 +81,12 @@ const styles = css`
     margin-top: 10px;
     border-radius: 10px;
   }
+
+  .Error {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+  }
 `;
 
 const title = css`
@@ -114,37 +97,34 @@ export default function Home({ data }) {
   const router = useRouter();
   const query = router.query.q;
   const [summonerName, setSummonerName] = useState("");
+  const [error, setError] = useState(false);
 
   async function getSummonerID(summonerName) {
     const responseBody = await getSummonerByName(summonerName);
-    if (responseBody) {
+    if (responseBody && responseBody.id) {
       router.push(`/summoner/${responseBody.id}`);
+    } else {
+      setError(true);
     }
   }
 
   return (
     <div css={styles}>
-      <h1 css={title}>AD LUX OP</h1>
-      <ul>
-        <li>
-          <a href="/free-champions">Free Champion</a>
-        </li>
-      </ul>
       <img src="https://i.pinimg.com/originals/d7/4a/c7/d74ac7338668caa0cbbbc85a06dfd24f.png" />
       <form
         onSubmit={e => {
           e.preventDefault();
           getSummonerID(summonerName);
-          // router.push(`/summoner/${summonerID}`);
         }}
       >
-        <label>Summoner Name</label>
         <input
           placeholder="Search summoner name"
           value={summonerName}
           onChange={e => setSummonerName(e.target.value)}
         />
+        { error && <h2 className={'Error'}>Summoner name invalid</h2> }
         <button type="submit">Search</button>
+        <a href="/free-champions">Free Champions</a>
       </form>
     </div>
   );

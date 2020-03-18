@@ -10,6 +10,7 @@ import {
 } from "../../../../api/api";
 import _ from "lodash";
 import MatchCard from "../../../../components/MatchCard";
+import NavBar from "../../../../components/navBar";
 
 const Name = styled.h1`
   align-self: center;
@@ -17,16 +18,12 @@ const Name = styled.h1`
 `;
 
 const container = css`
+  margin-top: 40px;
   height:100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
-  background-repeat: no-repeat;
-  background-color: black;
-  position: absolute;
-  overflow: auto;
 
   button {
     background-color: #4caf50; /* Green */
@@ -76,22 +73,24 @@ function MatchHistory() {
   console.log(backUrl);
 
   return (
-    <div css={container}>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <div>
-            <button onClick={() => {router.push(backUrl)}}>Back</button>
-            <Name>{summonerName}: Match History (Last 10 Games)</Name>
-          </div>
-          {matchHistory.map((match, i) => {
-            return (
-              <MatchCard key={i} match={match} summonerName={summonerName} />
-            );
-          })}
-        </>
-      )}
+    <div>
+      <NavBar title={'Match History'} onClickBack={() => {router.push(backUrl)}}/>
+      <div css={container}>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div>
+              <Name>{summonerName}'s Last 10 Games</Name>
+            </div>
+            {matchHistory.map((match, i) => {
+              return (
+                <MatchCard key={i} match={match} summonerName={summonerName} />
+              );
+            })}
+          </>
+        )}
+      </div>
     </div>
   );
 }

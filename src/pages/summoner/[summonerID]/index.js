@@ -6,18 +6,15 @@ import { useRouter } from "next/router";
 import SummonerStats from "../../../components/SummonerStats";
 import Spinner from "../../../components/Spinner";
 import { getStatsBySummonerId, getSummonerById } from "../../../api/api";
+import NavBar from "../../../components/navBar";
 
 const container = css`
+  margin-top: 40px;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("https://i.imgur.com/voR8Lgi.jpg");
-  background-repeat: no-repeat;
-  background-color: black;
-  position: absolute;
-  overflow: auto;
 
   button {
     background-color: #4caf50; /* Green */
@@ -65,15 +62,10 @@ function Summoner() {
       async function getSummonerStats() {
         const responseBody = await getStatsBySummonerId(summonerID);
         if (responseBody) {
-          console.log(responseBody);
           if (responseBody[0]) {
-            console.log("has flex stats");
-            console.log(responseBody[0]);
             setRankedFlexStats(responseBody[0]);
           }
           if (responseBody[1]) {
-            console.log("has soloduo stats");
-            console.log(responseBody[1]);
             setRankedSoloDuoStats(responseBody[1]);
           } else {
             setRankedFlexStats("Unranked");
@@ -85,8 +77,6 @@ function Summoner() {
       async function getSummonerInfo() {
         const responseBody = await getSummonerById(summonerID);
         if (responseBody) {
-          console.log("getting profile icon");
-          console.log(responseBody);
           setSummonerInfo(responseBody);
         }
       }
@@ -95,51 +85,50 @@ function Summoner() {
     }
   }, [summonerID]);
 
-  console.log(summonerInfo.profileIconId);
   iconID = summonerInfo.profileIconId;
   var finalIconUrl = iconBaseUrl.concat(iconID).concat(iconFormat);
-  console.log(finalIconUrl);
-  console.log(summonerInfo.summonerLevel);
 
   return (
-    <div css={container}>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <>
-          <div>
-            <button onClick={() => {router.push('/')}}>Back</button>
-            <Name>{summonerInfo.name}</Name>
-          </div>
-          <ImgContainer>
-            <img src={finalIconUrl} height="100" width="100" />
-          </ImgContainer>
-          <div>
-            <h2 style={{ color: "white" }}>
-              Current Level: {summonerInfo.summonerLevel}
-            </h2>
-          </div>
+    <div>
+      <NavBar title={'Profile'} onClickBack={() => {router.push('/')}}/>
+      <div css={container}>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div>
+              <Name>{summonerInfo.name}</Name>
+            </div>
+            <ImgContainer>
+              <img src={finalIconUrl} height="100" width="100" />
+            </ImgContainer>
+            <div>
+              <h2 style={{ color: "white" }}>
+                Current Level: {summonerInfo.summonerLevel}
+              </h2>
+            </div>
 
-          <SummonerStats
-            flexStats={rankedFlexStats ? rankedFlexStats : null}
-            soloDuoStats={rankedSoloDuoStats ? rankedSoloDuoStats : null}
-          />
-        </>
-      )}
-      <button
-        onClick={() => {
-          router.push(`/summoner/${summonerID}/match-history`);
-        }}
-      >
-        View Match History
-      </button>
-      <button
-        onClick={() => {
-          router.push(`/summoner/${summonerID}/mastery`);
-        }}
-      >
-        View Mastery
-      </button>
+            <SummonerStats
+              flexStats={rankedFlexStats ? rankedFlexStats : null}
+              soloDuoStats={rankedSoloDuoStats ? rankedSoloDuoStats : null}
+            />
+          </>
+        )}
+        <button
+          onClick={() => {
+            router.push(`/summoner/${summonerID}/match-history`);
+          }}
+        >
+          View Match History
+        </button>
+        <button
+          onClick={() => {
+            router.push(`/summoner/${summonerID}/mastery`);
+          }}
+        >
+          View Mastery
+        </button>
+      </div>
     </div>
   );
 }

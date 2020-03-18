@@ -9,8 +9,7 @@ function Summoner() {
 
   return (
     <div>
-        <h1>Summoner</h1>
-        <button onClick={() => router.push('/summoner/12837912873')}>Go to Summoner 12837912873</button>
+      <h1 css={css`color: red; text-align: center;`}>ERROR Summoner Not Found</h1>
     </div>
   );
 }

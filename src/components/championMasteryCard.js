@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {css, jsx, Global} from '@emotion/core';
-import { getChampionInfoById, getChampionFullImageUrlById } from '../api/api';
+import { getChampionInfoById, getChampionTileImageUrlById } from '../api/api';
 
 export default function ChampionMasteryCard({masteryInfo}) {
 
@@ -10,20 +10,32 @@ export default function ChampionMasteryCard({masteryInfo}) {
     const [championImage, setChampionImage] = useState("");
 
     const styles = css`
-        background-color: lightgrey;
-        border: 2px solid lightgrey;
-        border-radius: 25px;
-        padding: 20px;
-        margin: auto;
-        margin-bottom: 20px;
-        overflow: auto;
-        width: 45%;
-        display: block;
+        flex-shrink: 0;
+        background-image: url(${championImage});
+        width: 380px;
+        height: 380px;
 
-        img {
-            height: 120px;
-            width: 120px;
-            border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        border-radius: 25px;
+
+        .infoContainer {
+            margin: 0px;
+            width: 100%;
+            background-color: #c0c0c0;
+            display: none;          
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+
+            h2 {
+                font-size: 13px;
+            }
+        }
+
+        :hover .infoContainer {
+            display: block;
         }
     `;
 
@@ -32,7 +44,7 @@ export default function ChampionMasteryCard({masteryInfo}) {
             const newChampionInfo = await getChampionInfoById(masteryInfo.championId);
             setChampionInfo(newChampionInfo);
 
-            const newChampionImage = await getChampionFullImageUrlById(masteryInfo.championId);
+            const newChampionImage = await getChampionTileImageUrlById(masteryInfo.championId);
             setChampionImage(newChampionImage);
         }
         getChampionData();
@@ -40,9 +52,18 @@ export default function ChampionMasteryCard({masteryInfo}) {
 
     return (
         <div css={styles}>
-            <div>
-                <img src={championImage}/>
+            <div className={'infoContainer'}>
+                <h1>{championInfo.name}</h1>
+                <h2>Champion Level: {masteryInfo.championLevel}</h2>
+                <h2>Chest Granted: {masteryInfo.chestGranted.toString()}</h2>
+                <h2>Champion Points Since Last Level: {masteryInfo.championPointsSinceLastLevel}</h2>
+                <h2>Champion Points Until Next Level: {masteryInfo.championPointsUntilNextLevel}</h2>
             </div>
+        </div>
+    );
+}
+
+/*
             <div>
                 <div>
                     <h1>{championInfo.name}</h1>
@@ -55,6 +76,5 @@ export default function ChampionMasteryCard({masteryInfo}) {
                     <h2>Champion Points Until Next Level: {masteryInfo.championPointsUntilNextLevel}</h2>
                 </div>
             </div>
-        </div>
-    );
-}
+
+*/

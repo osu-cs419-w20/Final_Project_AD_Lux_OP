@@ -11,6 +11,7 @@ export default function ChampionList({champions}) {
         display: flex;
         flex-wrap: wrap;
     `;
+    console.log(champions);
 
     return (
         <div css={styles}>

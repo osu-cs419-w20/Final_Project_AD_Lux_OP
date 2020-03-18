@@ -8,8 +8,11 @@ import styled from "@emotion/styled";
 import Spinner from "../../components/Spinner";
 import { getChampionRotation } from "../../api/api";
 import ChampionList from '../../components/championList';
+import NavBar from "../../components/navBar";
+import CheckBox from "../../components/checkbox";
 
 const styles = css`
+  margin-top: 100px;
   margin-left: 60px;
   margin-right: 60px;
   padding: auto;
@@ -24,25 +27,11 @@ const labelStyle = css`
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 `;
 
-const backButtonStyle = css`
-  margin-top: 70px;
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  margin: auto;
-  margin-top: 10px;
-  border-radius: 10px;
-`;
-
 function free_champion() {
   const router = useRouter();
   const [mFreeChampions, setMFreeChampions] = useState();
   const [loading, setLoading] = useState(true);
+  const [newPlayer, setNewPlayer] = useState(false);
 
   useEffect(() => {
     async function getFreeChampions() {
@@ -50,26 +39,28 @@ function free_champion() {
       if (freeChampions) {
         setMFreeChampions(freeChampions);
         setLoading(false);
-        console.log(freeChampions);
       }
     }
     getFreeChampions();
   }, []);
 
   return(
-    <div css={styles}>
-      <div css={css``}>
-        <button css={backButtonStyle} onClick={() => {router.push('/')}}>Back</button>
+    <div>
+      <NavBar title={'Free To Play Champions'} onClickBack={() => {router.push('/')}}>
+        <CheckBox label={'New Player'} size={40} onClick={(value) => setNewPlayer(value)}/>
+      </NavBar>
+      <div css={styles}>
+        {
+        loading ? <Spinner/> :
+          <div>
+            {
+              newPlayer ?
+              <ChampionList champions={mFreeChampions.freeChampionIdsForNewPlayers}/> :
+              <ChampionList champions={mFreeChampions.freeChampionIds}/>
+            }
+          </div>
+        }
       </div>
-      {
-      loading ? <Spinner/> :
-        <div>
-          <h2 css={labelStyle}>Free Champions</h2>
-          <ChampionList champions={mFreeChampions.freeChampionIds}/>
-          <h2 css={labelStyle}>Free Champions For New Players</h2>
-          <ChampionList champions={mFreeChampions.freeChampionIdsForNewPlayers}/>
-        </div>
-      }
     </div>
   );
 }
