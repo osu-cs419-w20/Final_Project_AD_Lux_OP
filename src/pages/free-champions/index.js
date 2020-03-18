@@ -11,9 +11,10 @@ import ChampionList from '../../components/championList';
 
 const styles = css`
   margin: 10px;
-  display: flex;
+  padding: auto;
+  display: block;
   justify-content: center;
-  flex-direction: column;
+  overflow: auto;
 `;
 
 const labelStyle = css`
@@ -23,7 +24,17 @@ const labelStyle = css`
 
 const backButtonStyle = css`
   margin-top: 70px;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
   text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 10px;
 `;
 
 function free_champion() {
@@ -47,11 +58,11 @@ function free_champion() {
     <div css={styles}>
       <div css={css``}>
         <button css={backButtonStyle} onClick={() => {router.push('/')}}>Back</button>
-        <h2 css={labelStyle}>Free Champions</h2>
       </div>
       {
       loading ? <Spinner/> :
         <div>
+          <h2 css={labelStyle}>Free Champions</h2>
           <ChampionList champions={mFreeChampions.freeChampionIds}/>
           <h2 css={labelStyle}>Free Champions For New Players</h2>
           <ChampionList champions={mFreeChampions.freeChampionIdsForNewPlayers}/>
