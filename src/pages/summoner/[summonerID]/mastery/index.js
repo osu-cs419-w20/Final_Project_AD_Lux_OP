@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { css, jsx, Global } from '@emotion/core';
 import { useRouter } from 'next/router';
 import { getChampionMasteriesBySummonerId } from '../../../../api/api';
+import ChampionMasteryCard from '../../../../components/championMasteryCard';
+
+const labelStyle = css`
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+`;
 
 function Mastery() {
   const router = useRouter();
@@ -13,6 +19,10 @@ function Mastery() {
 
   useEffect(() => {
     async function getChampionMasteries() {
+      if (!summonerID) {
+        return;
+      }
+
       const newChampionMasteries = await getChampionMasteriesBySummonerId(summonerID);
       setChampionMasteries(newChampionMasteries);
       setLoading(false);
@@ -23,10 +33,11 @@ function Mastery() {
 
   return (
     <div>
-        <h1>Mastery of summoner with ID: {summonerID}</h1>
+        <h1 css={labelStyle}>Champion Mastery</h1>
         {
           loading ? "" : championMasteries.map((mastery, index) => {
-            return <h2>champion ID {mastery.championId}</h2>
+            console.log(mastery);
+            return <ChampionMasteryCard key={index} masteryInfo={mastery}/>
           })
         }
     </div>
