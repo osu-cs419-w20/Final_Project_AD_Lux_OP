@@ -2,7 +2,7 @@ const router = require("express").Router();
 const request = require("request");
 
 const riotBaseUrl = "https://na1.api.riotgames.com";
-const riotApiKey = "RGAPI-69fe5c6f-6d11-49a2-b14b-de97062b3800";
+const riotApiKey = "RGAPI-3019e47e-3a17-42cc-8054-6d148030521e";
 
 router.get("/*", (req, res) => {
   request(
