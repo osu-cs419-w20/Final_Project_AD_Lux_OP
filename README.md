@@ -1,5 +1,5 @@
-# FINAL_PROJECT_AD_LUX_OP
-
+# FINAL PROJECT of AD_LUX_OP
+# Class CS 419 Advanced Web Development
 ```
 Run Command
 $ npm start
